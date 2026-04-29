@@ -288,7 +288,6 @@
             const data = Object.fromEntries(formData.entries());
             data.heures = parseInt(data.heures, 10) || 0;
             data.note = parseFloat(data.note) || 0;
-            data.isReal = 1;
 
             try {
                 const { error } = await supabase.from('survey_data').insert([data]);

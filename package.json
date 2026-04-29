@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/generate-supabase-config.js",
     "vercel-build": "npm run build",
+    "seed": "node scripts/seed-fake-data.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
     "node": "24.x"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.1",
     "dotenv": "^16.6.1"
   }
 }
