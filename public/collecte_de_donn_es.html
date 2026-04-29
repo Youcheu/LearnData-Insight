@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Collecte de données - LearnData Insight</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f7f9fb",
+                        "on-primary-fixed-variant": "#3e3c8f",
+                        "secondary": "#006c49",
+                        "primary": "#1a146b",
+                        "surface": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-container": "#312e81",
+                        "tertiary-fixed": "#e1e0ff",
+                        "on-primary-container": "#9c9af4",
+                        "on-background": "#191c1e",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-primary-fixed": "#100563",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-surface-variant": "#474651",
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-container": "#1e19b2",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-secondary-fixed": "#002113",
+                        "outline": "#777682",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "tertiary": "#0a0086",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#00714d",
+                        "on-tertiary-container": "#979aff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#5654a8",
+                        "on-tertiary-fixed": "#07006c",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-primary": "#c3c0ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary-container": "#6cf8bb",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "outline-variant": "#c8c5d3",
+                        "on-surface": "#191c1e",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2d3133"
+                    },
+                    "borderRadius": {
+                        "sm": "0.25rem",
+                        "DEFAULT": "0.5rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "stack-lg": "48px",
+                        "container-max": "1280px",
+                        "margin-desktop": "32px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "stack-xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-sm": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "fontWeight": "800" }],
+                        "label-caps": ["11px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md flex min-h-screen">
+<!-- SideNavBar Component -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col p-4 gap-2 bg-slate-50 dark:bg-slate-950 h-screen w-64 border-r rounded-none border-r border-slate-200 dark:border-slate-800 flat no shadows z-40">
+<!-- Header -->
+<div class="flex items-center gap-3 px-4 py-6 mb-4">
+<div class="w-10 h-10 rounded-DEFAULT bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl">
+                L
+            </div>
+<div>
+<h1 class="font-black text-indigo-900 dark:text-indigo-300 text-lg tracking-tight leading-none">LearnData</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Academic Portal</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-4 mb-6">
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-1 flex-1 font-manrope text-sm font-medium">
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-indigo-500 outline-none" href="tableau_de_bord.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-3 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-lg px-4 py-3 font-bold hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-indigo-500 outline-none" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+                Data Entry
+            </a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-indigo-500 outline-none" href="tableau_de_bord.html">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+                Analytics
+            </a>
+</div>
+<!-- Footer Links -->
+<div class="mt-auto font-manrope text-sm font-medium">
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop flex flex-col items-center">
+<div class="w-full max-w-3xl">
+<!-- Header section for mobile (hidden on desktop where SideNav exists) -->
+<div class="md:hidden flex items-center justify-between mb-8 pb-4 border-b border-outline-variant">
+<h1 class="font-black text-primary text-xl tracking-tight leading-none">LearnData</h1>
+<span class="material-symbols-outlined text-primary">menu</span>
+</div>
+<!-- Page Title -->
+<div class="mb-stack-lg">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-background mb-2">Collecte de données</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Veuillez remplir ce formulaire pour nous aider à améliorer l'accompagnement étudiant.</p>
+</div>
+<a class="hidden sm:flex items-center gap-2 text-primary font-label-bold text-label-bold hover:underline" href="tableau_de_bord.html">
+                        Retour au Dashboard
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-md md:p-stack-lg shadow-sm">
+<!-- Confirmation Message Placeholder -->
+<div class="hidden mb-6 p-4 rounded-DEFAULT bg-secondary-container text-on-secondary-container flex items-start gap-3 border border-secondary-fixed" id="confirmation-message">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<h4 class="font-label-bold text-label-bold mb-1">Données enregistrées avec succès</h4>
+<p class="font-body-sm text-body-sm">Merci pour votre participation. Vos réponses ont bien été prises en compte.</p>
+</div>
+</div>
+<form action="/api/submit" class="space-y-stack-md" method="POST">
+<!-- Genre -->
+<div class="space-y-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface block">1. Genre</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="text-primary focus:ring-primary border-outline-variant" name="genre" type="radio" value="homme"/>
+<span class="font-body-sm text-body-sm text-on-surface">Homme</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="text-primary focus:ring-primary border-outline-variant" name="genre" type="radio" value="femme"/>
+<span class="font-body-sm text-body-sm text-on-surface">Femme</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="text-primary focus:ring-primary border-outline-variant" name="genre" type="radio" value="autre"/>
+<span class="font-body-sm text-body-sm text-on-surface">Autre</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="text-primary focus:ring-primary border-outline-variant" name="genre" type="radio" value="nsp"/>
+<span class="font-body-sm text-body-sm text-on-surface">Ne souhaite pas répondre</span>
+</label>
+</div>
+</div>
+<!-- Filière -->
+<div class="space-y-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface block" for="filiere">2. Filière principale</label>
+<select class="w-full bg-surface border border-outline-variant rounded-DEFAULT p-3 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="filiere" name="filiere">
+<option disabled="" selected="" value="">Sélectionnez votre filière</option>
+<option value="informatique">Informatique</option>
+<option value="mathematiques">Mathématiques</option>
+<option value="physique">Physique</option>
+<option value="biologie">Biologie</option>
+<option value="lettres">Lettres</option>
+<option value="droit">Droit</option>
+<option value="autre">Autre</option>
+</select>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Heures de révision -->
+<div class="space-y-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface block" for="heures">3. Heures de révision par semaine</label>
+<input class="w-full bg-surface border border-outline-variant rounded-DEFAULT p-3 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="heures" min="0" name="heures" placeholder="Ex: 15" type="number"/>
+</div>
+<!-- Note moyenne -->
+<div class="space-y-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface block" for="note">5. Note moyenne sur 20</label>
+<input class="w-full bg-surface border border-outline-variant rounded-DEFAULT p-3 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="note" max="20" min="0" name="note" placeholder="Ex: 14.5" step="0.5" type="number"/>
+</div>
+</div>
+<!-- Outils numériques -->
+<div class="space-y-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface block" for="outils">4. Utilisation d'outils numériques</label>
+<select class="w-full bg-surface border border-outline-variant rounded-DEFAULT p-3 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="outils" name="outils_numeriques">
+<option disabled="" selected="" value="">Fréquence d'utilisation</option>
+<option value="jamais">Jamais</option>
+<option value="rarement">Rarement</option>
+<option value="parfois">Parfois</option>
+<option value="souvent">Souvent</option>
+<option value="toujours">Toujours</option>
+</select>
+</div>
+<!-- Sport -->
+<div class="space-y-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface block" for="sport">6. Séances de sport par semaine</label>
+<select class="w-full bg-surface border border-outline-variant rounded-DEFAULT p-3 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="sport" name="sport">
+<option disabled="" selected="" value="">Nombre de séances</option>
+<option value="0">0</option>
+<option value="1-2">1 à 2</option>
+<option value="3-4">3 à 4</option>
+<option value="5+">5 et plus</option>
+</select>
+</div>
+<!-- Conseil -->
+<div class="space-y-stack-sm">
+<div class="flex items-baseline justify-between">
+<label class="font-label-bold text-label-bold text-on-surface block" for="conseil">7. Un conseil pour réussir</label>
+<span class="font-body-sm text-[12px] text-on-surface-variant italic">Optionnel</span>
+</div>
+<textarea class="w-full bg-surface border border-outline-variant rounded-DEFAULT p-3 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-y" id="conseil" name="conseil" placeholder="Partagez votre méthode ou conseil..." rows="4"></textarea>
+</div>
+<!-- Actions -->
+<div class="pt-stack-sm flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-outline-variant mt-stack-md">
+<a class="sm:hidden font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" href="#">
+                            Annuler et retourner
+                        </a>
+<button class="w-full sm:w-auto bg-primary text-on-primary font-label-bold text-label-bold px-8 py-3 rounded-DEFAULT hover:bg-primary-container focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all shadow-sm flex items-center justify-center gap-2" type="submit">
+                            Soumettre les données
+                            <span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</form>
+</div>
+<div class="mt-8 text-center sm:hidden">
+<a class="inline-flex items-center gap-2 text-primary font-label-bold text-label-bold hover:underline" href="tableau_de_bord.html">
+                    Retour au Dashboard
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</main>
+    <script>
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            try {
+                const response = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    const msg = document.getElementById('confirmation-message');
+                    msg.classList.remove('hidden');
+                    e.target.reset();
+                    setTimeout(() => msg.classList.add('hidden'), 5000);
+                } else {
+                    alert('Erreur lors de l\'envoi : ' + (result.error || 'Erreur inconnue'));
+                }
+            } catch (error) {
+                console.error('Submission failed:', error);
+                alert('Erreur réseau. Veuillez réessayer.');
+            }
+        });
+    </script>
+</body></html>

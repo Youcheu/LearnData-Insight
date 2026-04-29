@@ -1,0 +1,163 @@
+---
+name: Analytical Academic
+colors:
+  surface: '#f7f9fb'
+  surface-dim: '#d8dadc'
+  surface-bright: '#f7f9fb'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#f2f4f6'
+  surface-container: '#eceef0'
+  surface-container-high: '#e6e8ea'
+  surface-container-highest: '#e0e3e5'
+  on-surface: '#191c1e'
+  on-surface-variant: '#474651'
+  inverse-surface: '#2d3133'
+  inverse-on-surface: '#eff1f3'
+  outline: '#777682'
+  outline-variant: '#c8c5d3'
+  surface-tint: '#5654a8'
+  primary: '#1a146b'
+  on-primary: '#ffffff'
+  primary-container: '#312e81'
+  on-primary-container: '#9c9af4'
+  inverse-primary: '#c3c0ff'
+  secondary: '#006c49'
+  on-secondary: '#ffffff'
+  secondary-container: '#6cf8bb'
+  on-secondary-container: '#00714d'
+  tertiary: '#0a0086'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#1e19b2'
+  on-tertiary-container: '#979aff'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#e2dfff'
+  primary-fixed-dim: '#c3c0ff'
+  on-primary-fixed: '#100563'
+  on-primary-fixed-variant: '#3e3c8f'
+  secondary-fixed: '#6ffbbe'
+  secondary-fixed-dim: '#4edea3'
+  on-secondary-fixed: '#002113'
+  on-secondary-fixed-variant: '#005236'
+  tertiary-fixed: '#e1e0ff'
+  tertiary-fixed-dim: '#c0c1ff'
+  on-tertiary-fixed: '#07006c'
+  on-tertiary-fixed-variant: '#2f2ebe'
+  background: '#f7f9fb'
+  on-background: '#191c1e'
+  surface-variant: '#e0e3e5'
+typography:
+  display-lg:
+    fontFamily: Manrope
+    fontSize: 48px
+    fontWeight: '800'
+    lineHeight: '1.1'
+  headline-md:
+    fontFamily: Manrope
+    fontSize: 32px
+    fontWeight: '700'
+    lineHeight: '1.2'
+  headline-sm:
+    fontFamily: Manrope
+    fontSize: 24px
+    fontWeight: '600'
+    lineHeight: '1.3'
+  body-lg:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: '400'
+    lineHeight: '1.6'
+  body-md:
+    fontFamily: Inter
+    fontSize: 16px
+    fontWeight: '400'
+    lineHeight: '1.6'
+  body-sm:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '400'
+    lineHeight: '1.5'
+  label-bold:
+    fontFamily: Inter
+    fontSize: 12px
+    fontWeight: '600'
+    lineHeight: '1'
+    letterSpacing: 0.05em
+  label-caps:
+    fontFamily: Inter
+    fontSize: 11px
+    fontWeight: '700'
+    lineHeight: '1'
+rounded:
+  sm: 0.25rem
+  DEFAULT: 0.5rem
+  md: 0.75rem
+  lg: 1rem
+  xl: 1.5rem
+  full: 9999px
+spacing:
+  unit: 8px
+  container-max: 1280px
+  gutter: 24px
+  margin-mobile: 16px
+  margin-desktop: 32px
+  stack-xs: 4px
+  stack-sm: 12px
+  stack-md: 24px
+  stack-lg: 48px
+---
+
+## Brand & Style
+
+The design system is engineered to bridge the gap between rigorous data analytics and accessible education. The brand personality is intellectual, precise, and encouraging, aimed at professionals and students who require clarity when navigating complex information. 
+
+The aesthetic follows a **Corporate / Modern** style with a focus on high-utility layouts. It prioritizes readability and information density without becoming overwhelming. By utilizing a restrained color palette and generous white space, this design system fosters an environment of focus and institutional trust. Visual flourishes are kept minimal, reserved for data visualization and success states to provide clear cognitive signaling.
+
+## Colors
+
+The palette is anchored by a deep **Indigo** primary, chosen for its associations with stability and professional authority. This is complemented by an **Emerald Green** secondary, specifically reserved for "positive data," completion states, and success indicators.
+
+The background uses a crisp **Light Grey/White** to maintain a clean educational canvas. Functional accents utilize **Slate Grey** for secondary text and borders, ensuring that the primary indigo remains the dominant focal point for action and hierarchy.
+
+## Typography
+
+This design system utilizes a dual-sans-serif approach. **Manrope** is used for headlines to provide a modern, refined geometric feel that remains highly legible at large scales. **Inter** is employed for all body copy and UI labels due to its exceptional performance in data-heavy environments and small-scale functional text.
+
+Type scales are strictly managed to ensure a clear information hierarchy. Heavy weights are reserved for headings to anchor the page, while body text maintains a generous line height to reduce cognitive fatigue during long reading sessions or data analysis.
+
+## Layout & Spacing
+
+A **fluid 12-column grid** is the foundation of the design system. This layout model adapts to the viewport while maintaining consistent 24px gutters. Content is housed within a centered container with a maximum width of 1280px for desktop viewing to prevent line lengths from becoming unreadable.
+
+The spacing rhythm follows an 8px base unit. Component-level spacing (padding inside cards and inputs) should prioritize the `stack-sm` and `stack-md` units to maintain a compact but breathable UI. Vertical rhythm between sections should utilize the larger `stack-lg` units to clearly demarcate different educational modules or data sets.
+
+## Elevation & Depth
+
+Hierarchy is established through **ambient shadows** and **tonal layers**. The background is kept at the lowest elevation (Level 0). Cards and primary UI containers are elevated to Level 1, utilizing a soft, diffused shadow with a subtle indigo tint to prevent the UI from looking "muddy."
+
+Interaction states, such as hovering over a data card, trigger a Level 2 elevation, characterized by a slightly deeper shadow and a subtle border-color shift. This creates a tactile response that guides the user's attention. Modals and dropdowns occupy the highest elevation, using a distinct backdrop blur to maintain focus on the task at hand.
+
+## Shapes
+
+The shape language is defined by a **Rounded** philosophy. Standard UI components like buttons and inputs use a 0.5rem (8px) radius. Larger containers, such as dashboard cards and educational panels, utilize the `rounded-lg` (1rem) or `rounded-xl` (1.5rem) settings to soften the professional aesthetic and make the data feel more approachable.
+
+This consistency in curvature ensures that even complex data visualizations feel part of a cohesive, friendly ecosystem.
+
+## Components
+
+### Buttons
+Primary buttons use the deep indigo background with white text. Secondary buttons use a light indigo ghost style or a subtle slate border. Buttons always feature the standard 8px corner radius.
+
+### Cards
+Cards are the primary container for data. They feature a white background, a 1px border in a soft grey accent, and a subtle Level 1 ambient shadow. They should include 24px of internal padding to ensure content does not feel cramped.
+
+### Form Inputs
+Inputs are "clear" and high-contrast. They utilize a 1px slate-grey border that thickens and changes to indigo on focus. Labels are always placed above the input field in the `label-bold` typographic style for maximum accessibility.
+
+### Data Visualization
+Charts and progress bars should prioritize the Emerald Green secondary for positive metrics and the Indigo primary for neutral or baseline data. Use soft grey accents for axes and grid lines to keep the focus on the data points themselves.
+
+### Lists & Tables
+Data tables should use alternating row highlights (zebra striping) in the softest grey accent. Table headers must use the `label-caps` style to differentiate from the data entries.

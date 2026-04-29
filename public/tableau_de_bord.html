@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Tableau de bord - LearnData Insight</title>
+  <!-- Material Symbols -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Tailwind Config -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "background": "#f7f9fb",
+            "on-primary-fixed-variant": "#3e3c8f",
+            "secondary": "#006c49",
+            "primary": "#1a146b",
+            "surface": "#f7f9fb",
+            "surface-dim": "#d8dadc",
+            "surface-container-low": "#f2f4f6",
+            "primary-container": "#312e81",
+            "tertiary-fixed": "#e1e0ff",
+            "on-primary-container": "#9c9af4",
+            "on-background": "#191c1e",
+            "secondary-fixed-dim": "#4edea3",
+            "on-primary-fixed": "#100563",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-surface-variant": "#474651",
+            "surface-container": "#eceef0",
+            "on-secondary-fixed-variant": "#005236",
+            "tertiary-container": "#1e19b2",
+            "on-error-container": "#93000a",
+            "surface-bright": "#f7f9fb",
+            "on-tertiary-fixed-variant": "#2f2ebe",
+            "on-secondary-fixed": "#002113",
+            "outline": "#777682",
+            "on-tertiary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#c0c1ff",
+            "tertiary": "#0a0086",
+            "surface-container-highest": "#e0e3e5",
+            "on-secondary-container": "#00714d",
+            "on-tertiary-container": "#979aff",
+            "error-container": "#ffdad6",
+            "surface-tint": "#5654a8",
+            "on-tertiary-fixed": "#07006c",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#6ffbbe",
+            "surface-container-high": "#e6e8ea",
+            "on-primary": "#ffffff",
+            "surface-variant": "#e0e3e5",
+            "inverse-primary": "#c3c0ff",
+            "inverse-on-surface": "#eff1f3",
+            "secondary-container": "#6cf8bb",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed": "#e2dfff",
+            "outline-variant": "#c8c5d3",
+            "on-surface": "#191c1e",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2d3133"
+          },
+          "borderRadius": {
+            "sm": "0.25rem",
+            "DEFAULT": "0.5rem",
+            "md": "0.75rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "16px",
+            "stack-md": "24px",
+            "stack-sm": "12px",
+            "stack-lg": "48px",
+            "container-max": "1280px",
+            "margin-desktop": "32px",
+            "gutter": "24px",
+            "unit": "8px",
+            "stack-xs": "4px"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "label-bold": ["Inter"],
+            "headline-sm": ["Manrope"],
+            "body-sm": ["Inter"],
+            "display-lg": ["Manrope"],
+            "label-caps": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Manrope"]
+          },
+          "fontSize": {
+            "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "label-bold": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+            "headline-sm": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "display-lg": ["48px", { "lineHeight": "1.1", "fontWeight": "800" }],
+            "label-caps": ["11px", { "lineHeight": "1", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Base typography enforcement to prevent inheritance issues */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Manrope', sans-serif;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-background text-on-background flex h-screen overflow-hidden">
+  <!-- SideNavBar Component -->
+  <aside
+    class="fixed left-0 top-0 h-full flex flex-col p-4 gap-2 h-screen w-64 border-r rounded-none border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-manrope text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none z-40 hidden md:flex">
+    <!-- Header -->
+    <div class="flex items-center gap-3 px-2 mb-6 mt-2">
+      <div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+        <img alt="Institution Logo" class="w-full h-full object-cover rounded-lg mix-blend-multiply opacity-80"
+          data-alt="Abstract academic emblem featuring an open book and dynamic swoosh in deep indigo and emerald tones"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC8qsu-NpmvfzRx6xpGIF4-HafSsHpYQG2sRnS99Fj6ny6WYZnZ3hKpfUpr_wDxpguigPP0ECnpmFg27VnXgZqEFtyslsUnPwuEZuZFwzVtlugv_CLZTOf_RPFFFmso6IThhF7rFj-9H-mF-q_7pY7Cu9_yiAScOrv2i3Eo70na2YQNHDHGBjztaqOun4zthIf93tePmMpJ1CxLIhBZzRMGiia3ZgCR80yqC4EmMILDlcDb4LtHJx1hjFPJ12fTp53OPAUu3g27og" />
+      </div>
+      <div>
+        <h1 class="font-black text-indigo-900 dark:text-indigo-300 tracking-tight leading-none text-base">LearnData</h1>
+        <p class="text-xs text-slate-500 mt-0.5">Academic Portal</p>
+      </div>
+    </div>
+    <!-- Navigation Tabs -->
+    <nav class="flex flex-col gap-1 flex-1">
+      <a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg hover:translate-x-1 transition-transform duration-200"
+        href="collecte_de_donn_es.html">
+        <span class="material-symbols-outlined text-[20px]">edit_note</span>
+        <span>Data Entry</span>
+      </a>
+      <!-- CTA & Footer -->
+      <div class="mt-auto flex flex-col gap-2">
+        <div class="h-px bg-slate-200 my-2"></div>
+      </div>
+  </aside>
+  <!-- Main Content Canvas -->
+  <main class="flex-1 md:ml-64 h-full overflow-y-auto flex flex-col bg-background relative">
+    <!-- TopAppBar Component -->
+    <header
+      class="sticky top-0 w-full z-50 flex items-center justify-between px-6 h-16 max-w-[1280px] mx-auto bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm font-manrope antialiased tracking-tight">
+      <div class="flex items-center gap-8">
+        <!-- Mobile Menu Trigger -->
+        <button class="md:hidden text-slate-600">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div class="text-xl font-extrabold text-indigo-900 dark:text-indigo-300 md:hidden">LearnData Insight</div>
+        <!-- Desktop Nav Cluster -->
+      </div>
+      </div>
+      <!-- Trailing Actions -->
+      <div class="flex items-center gap-4">
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200">
+          <img alt="User profile" class="w-full h-full object-cover"
+            data-alt="Headshot of a professional researcher wearing a dark suit against a neutral studio background with soft lighting"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrcVyx4ShJhkheNSSleLvg58U3kotUE4WLee_RqPucGwJFKY8SK-j-T304vXNyfhGYTB5OyEj9dPlBVa1O-iE9Ku-EegteVDFzX7Yk2mCB6dBukfYFIV4XFll5rpgvFwRQtNzJIk7ta2Isp1Og4R_SsCbOxK5eSSmn9PxWqvBzpKqBV0cOeJpu9jvmsSjBGDjk5AhuMzO79ypoSa-S42CIa8SMMq4QJujTSkZHRkvrsPjE81YvjHhSid2Sl4OSP_6-WVhIx6UTUIw" />
+        </div>
+      </div>
+    </header>
+    <!-- Dashboard Content -->
+    <div class="w-full max-w-[1280px] mx-auto p-margin-mobile md:p-margin-desktop flex-1 flex flex-col">
+      <!-- Page Header Controls -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-stack-lg">
+        <div>
+          <a class="inline-flex items-center gap-1 text-primary hover:text-primary-container text-body-sm font-body-sm mb-2 transition-colors"
+            href="collecte_de_donn_es.html">
+            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            Retour à l'accueil
+          </a>
+          <h2 class="font-headline-md text-headline-md text-on-background tracking-tight">Tableau de bord</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-1">Analyse des performances et corrélation des
+            révisions (Actualisation auto: 10s)</p>
+        </div>
+        <div class="flex items-center gap-3">
+        </div>
+      </div>
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-stack-lg flex-1">
+        <!-- Stats Row (Spans full width) -->
+        <div class="col-span-1 md:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+          <!-- Card 1 -->
+          <div
+            class="bg-surface-container-lowest rounded-xl border border-surface-variant p-stack-md shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-tertiary-fixed opacity-20 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+            </div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Moyenne des
+                notes</span>
+              <span
+                class="material-symbols-outlined text-secondary bg-secondary-fixed-dim/20 p-2 rounded-lg">school</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display-lg text-display-lg text-on-background" id="stat-mean">0.0</span>
+              <span class="font-body-sm text-body-sm text-secondary flex items-center font-medium">
+                <span class="material-symbols-outlined text-[14px]">arrow_upward</span> +0.4
+              </span>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="bg-surface-container-lowest rounded-xl border border-surface-variant p-stack-md shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-primary-fixed opacity-20 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+            </div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Écart-type
+                des notes</span>
+              <span
+                class="material-symbols-outlined text-primary bg-primary-fixed-dim/20 p-2 rounded-lg">data_usage</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display-lg text-display-lg text-on-background" id="stat-stddev">0.00</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">dispersion</span>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="bg-surface-container-lowest rounded-xl border border-surface-variant p-stack-md shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-secondary-fixed opacity-20 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+            </div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Équation de
+                régression</span>
+              <span
+                class="material-symbols-outlined text-tertiary-container bg-tertiary-fixed/40 p-2 rounded-lg">functions</span>
+            </div>
+            <div class="flex items-baseline gap-2 mt-2">
+              <span class="font-headline-md text-headline-md text-on-background font-mono tracking-tighter" id="stat-reg">y = ax + b</span>
+            </div>
+            <div class="mt-1 text-xs text-on-surface-variant font-medium">Heures vs Notes</div>
+          </div>
+          <!-- Card 4 (NEW) -->
+          <div
+            class="bg-surface-container-lowest rounded-xl border border-surface-variant p-stack-md shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-indigo-200 opacity-20 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+            </div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Étudiants</span>
+              <span
+                class="material-symbols-outlined text-indigo-700 bg-indigo-100 p-2 rounded-lg">groups</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display-lg text-display-lg text-on-background" id="stat-total">0</span>
+              <span class="font-body-sm text-body-sm text-indigo-600 font-medium tracking-tight">participations</span>
+            </div>
+          </div>
+        </div>
+        <!-- Charts Section -->
+        <!-- Histogram (Spans 8 cols) -->
+        <div
+          class="col-span-1 md:col-span-8 bg-surface-container-lowest rounded-xl border border-surface-variant p-stack-md shadow-sm flex flex-col min-h-[360px]">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-headline-sm text-headline-sm text-on-background">Répartition des notes</h3>
+          </div>
+          <!-- Chart Placeholder Layout (simulating a histogram canvas space) -->
+          <!-- Chart Workspace -->
+          <div class="flex-1 relative min-h-[250px]">
+            <canvas id="histogramChart"></canvas>
+          </div>
+
+        </div>
+        <!-- Pie Chart (Spans 4 cols) -->
+        <div
+          class="col-span-1 md:col-span-4 bg-surface-container-lowest rounded-xl border border-surface-variant p-stack-md shadow-sm flex flex-col min-h-[360px]">
+          <h3 class="font-headline-sm text-headline-sm text-on-background mb-8">Répartition par genre</h3>
+          <div class="flex-1 flex items-center justify-center relative">
+            <canvas id="genreChart"></canvas>
+          </div>
+        </div>
+        <!-- Scatter Plot (Spans 12 cols) -->
+        <div
+          class="col-span-1 md:col-span-12 bg-surface-container-lowest rounded-xl border border-surface-variant p-stack-md shadow-sm flex flex-col min-h-[400px]">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-on-background">Heures de révision vs Notes obtenues</h3>
+              <p class="text-xs text-on-surface-variant mt-1">Corrélation positive forte (R² = 0.82)</p>
+            </div>
+          </div>
+          <!-- Scatter Plot Canvas Area -->
+          <!-- Chart Workspace -->
+          <div class="flex-1 relative min-h-[300px]">
+             <canvas id="scatterChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://unpkg.com/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
+  <script>
+    let histogramChart, genreChart, scatterChart;
+
+    function initCharts() {
+      const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { family: 'Inter' } } }
+        }
+      };
+
+      histogramChart = new Chart(document.getElementById('histogramChart'), {
+        type: 'bar',
+        data: { labels: [], datasets: [{ label: 'Effectif', backgroundColor: '#1a146b', data: [] }] },
+        options: commonOptions
+      });
+
+      genreChart = new Chart(document.getElementById('genreChart'), {
+        type: 'doughnut',
+        data: { labels: ['Hommes', 'Femmes', 'Autres'], datasets: [{ backgroundColor: ['#1a146b', '#006c49', '#3e3c8f'], data: [] }] },
+        options: commonOptions
+      });
+
+      scatterChart = new Chart(document.getElementById('scatterChart'), {
+        type: 'scatter',
+        data: { datasets: [{ label: 'Étudiants', backgroundColor: 'rgba(26, 20, 107, 0.6)', data: [] }] },
+        options: {
+          ...commonOptions,
+          scales: {
+            x: { title: { display: true, text: 'Heures de révision', font: { weight: 'bold' } } },
+            y: { title: { display: true, text: 'Notes (0-20)', font: { weight: 'bold' } }, min: 0, max: 20 }
+          }
+        }
+      });
+    }
+
+    async function updateDashboard() {
+      try {
+        const res = await fetch('/api/data');
+        const data = await res.json();
+        if (!data || !data.length) return;
+
+        const validData = data.filter(d => typeof d.note === 'number' && !isNaN(d.note) && typeof d.heures === 'number' && !isNaN(d.heures));
+        if (!validData.length) return;
+
+        const notes = validData.map(d => d.note);
+
+        // Update Stats
+        const mean = ss.mean(notes);
+        const stdDev = ss.standardDeviation(notes);
+        const reg = ss.linearRegression(validData.map(d => [d.heures, d.note]));
+
+        document.getElementById('stat-mean').textContent = mean.toFixed(1);
+        document.getElementById('stat-stddev').textContent = stdDev.toFixed(2);
+        document.getElementById('stat-reg').textContent = `y = ${reg.m.toFixed(2)}x + ${reg.b.toFixed(2)}`;
+        document.getElementById('stat-total').textContent = data.length;
+
+        // Update Charts
+        if (!histogramChart) initCharts();
+
+        // 1. Histogram (Bins)
+        const bins = [0, 5, 10, 12, 14, 16, 18, 20];
+        const binLabels = ["0-5", "5-10", "10-12", "12-14", "14-16", "16-18", "18-20"];
+        const binnedData = binLabels.map((_, i) => 
+          notes.filter(n => n >= bins[i] && n < (i === bins.length - 2 ? 21 : bins[i+1])).length
+        );
+        histogramChart.data.labels = binLabels;
+        histogramChart.data.datasets[0].data = binnedData;
+        histogramChart.update('none');
+
+        // 2. Genre Chart
+        const maleCount = validData.filter(d => d.genre && d.genre.toLowerCase() === 'homme').length;
+        const femaleCount = validData.filter(d => d.genre && d.genre.toLowerCase() === 'femme').length;
+        const otherCount = validData.length - maleCount - femaleCount;
+        genreChart.data.datasets[0].data = [maleCount, femaleCount, otherCount];
+        genreChart.update('none');
+
+        // 3. Scatter Chart
+        scatterChart.data.datasets[0].data = validData.map(d => ({ x: d.heures, y: d.note }));
+        scatterChart.update('none');
+
+        console.log('Dashboard updated with', data.length, 'entries');
+      } catch (e) {
+        console.error('Update failed', e);
+      }
+    }
+
+    initCharts();
+    setInterval(updateDashboard, 10000);
+    updateDashboard();
+  </script>
+</body>
+
+</html>
