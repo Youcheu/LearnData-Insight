@@ -5,3 +5,5 @@ database.sqlite
 *.log
 .env.local
 .env
+public/supabase-config.js
+.env

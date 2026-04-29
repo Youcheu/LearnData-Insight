@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "build": "echo \"Aucune étape de build nécessaire pour LearnData Insight\"",
+    "build": "node scripts/generate-supabase-config.js",
     "vercel-build": "npm run build",
-    "migrate:sqlite-to-supabase": "node scripts/migrate-sqlite-to-supabase.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,11 +15,6 @@
     "node": "24.x"
   },
   "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^16.6.1",
-    "express": "^5.2.1",
-    "pg": "^8.11.1",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^6.0.1"
+    "dotenv": "^16.6.1"
   }
 }

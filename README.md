@@ -1,51 +1,68 @@
 # LearnData Insight
 
-Application Express avec support PostgreSQL via Supabase et fallback SQLite local pour le développement.
+Application front-end statique utilisant Supabase pour stocker les données des formulaires et afficher le tableau de bord.
+
+## Architecture
+
+- Pas de backend Express
+- Pages servies en statique depuis `public/`
+- Supabase gère le stockage des données
+- `public/collecte_de_donn_es.html` envoie les données vers Supabase
+- `public/tableau_de_bord.html` lit les données depuis Supabase
 
 ## Déploiement Vercel
 
-Clique sur le bouton ci-dessous pour déployer directement le projet sur Vercel :
+1. Définis ces variables d'environnement dans Vercel :
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+2. Assure-toi que `vercel.json` existe dans le projet.
+3. Déploie le projet normalement.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Youcheu/LearnData-Insight&project-name=learndata-insight&repo-name=learndata-insight)
+## Variables d'environnement locales
 
-> Utilise un nom de projet Vercel valide : uniquement lettres, chiffres, `-`, `_`, `.` et pas d’espace.
+Crée un fichier `.env` à la racine du projet contenant :
 
-## Configuration
+```env
+SUPABASE_URL=https://<your-project>.supabase.co
+SUPABASE_ANON_KEY=<your-public-anon-key>
+```
 
-- `vercel.json` est déjà configuré pour rediriger toutes les requêtes vers `api/index.js`.
-- `package.json` contient les scripts suivants :
-  - `npm run dev` pour démarrer localement
-  - `npm run build` pour la build Vercel
-  - `npm run vercel-build` pour l'étape de build Vercel
+Si tu as déjà un `DATABASE_URL` Supabase, le script de build peut en extraire l'URL du projet :
 
-## Variables d'environnement
+```env
+DATABASE_URL=postgresql://username:password@<host>:5432/postgres
+```
 
-Utilise le fichier `.env` local ou configure les variables directement dans le dashboard Vercel :
+Sur Vercel, ajoute les mêmes variables dans les paramètres d'environnement du projet.
 
-- `PORT` (optionnel)
-- `DATABASE_PATH` (optionnel, local seulement)
-- `DATABASE_URL` (utiliser une base Postgres externe en production)
-- `NODE_ENV`
+## Setup Supabase
 
-> En production Vercel, l'application utilisera `/tmp/database.sqlite` si `DATABASE_URL` n'est pas défini.
-> Si `DATABASE_URL` est défini, l'application se connectera à une base Postgres externe et gardera les données persistantes.
+Tu dois créer une table `survey_data` dans Supabase avec le schéma suivant :
 
-## Migration SQLite → Supabase
+```sql
+CREATE TABLE public.survey_data (
+  id SERIAL PRIMARY KEY,
+  genre TEXT,
+  filiere TEXT,
+  heures INTEGER,
+  outils_numeriques TEXT,
+  note NUMERIC,
+  sport TEXT,
+  conseil TEXT,
+  isReal INTEGER,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-1. Crée un fichier `.env` local avec :
-   ```env
-   DATABASE_URL=postgresql://postgres:TON_MOT_DE_PASSE@db.xrtzwikiyumsqdkwbmli.supabase.co:5432/postgres
-   ```
-2. Vérifie que `database.sqlite` existe à la racine du projet.
-3. Lance la migration :
-   ```bash
-   npm run migrate:sqlite-to-supabase
-   ```
-4. Copie la même valeur `DATABASE_URL` dans les variables d'environnement de Vercel.
-5. Redéploie le projet.
+Laisse `Row Level Security` désactivé pour un accès direct en lecture/écriture depuis le front-end, ou configure des policies adaptées.
+
+## Commandes
+
+- `npm install` pour installer `dotenv` (utilisé localement pour générer la config)
+- `npm run build` pour générer `public/supabase-config.js`
+- `npm run vercel-build` est identique à `npm run build`
 
 ## Notes
 
-- Le projet utilise `dotenv` pour charger les variables locales.
-- En local, `SQLite` reste un fallback si `DATABASE_URL` n'est pas défini.
-- Sur Vercel, `DATABASE_URL` est recommandé pour une base persistante.
+- `public/supabase-config.js` est généré à chaque build et n'est pas commité.
+- Le backend Express a été supprimé. Le site est désormais entièrement statique.
