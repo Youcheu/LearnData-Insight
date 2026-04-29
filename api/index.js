@@ -81,8 +81,10 @@ async function initializeDb() {
     if (db) return; // Already initialized
     
     try {
-        // Use a custom DATABASE_PATH if provided, otherwise /tmp on Vercel or local database.sqlite.
-        const dbPath = process.env.DATABASE_PATH || (process.env.VERCEL ? '/tmp/database.sqlite' : path.join(__dirname, '../database.sqlite'));
+        const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
+        const dbPath = process.env.DATABASE_PATH || (isVercel ? '/tmp/database.sqlite' : path.join(__dirname, '../database.sqlite'));
+        
+        console.log(`[DB] Using database path: ${dbPath}`);
         
         db = await open({
             filename: dbPath,
