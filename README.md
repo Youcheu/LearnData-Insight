@@ -6,7 +6,9 @@ Application Express + SQLite pour la collecte de données et l'affichage de tabl
 
 Clique sur le bouton ci-dessous pour déployer directement le projet sur Vercel :
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Youcheu/LearnData-Insight&project-name=LearnData-Insight&repo-name=LearnData-Insight)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Youcheu/LearnData-Insight&project-name=learndata-insight&repo-name=learndata-insight)
+
+> Utilise un nom de projet Vercel valide : uniquement lettres, chiffres, `-`, `_`, `.` et pas d’espace.
 
 ## Configuration
 
@@ -22,9 +24,11 @@ Utilise le fichier `.env` local ou configure les variables directement dans le d
 
 - `PORT` (optionnel)
 - `DATABASE_PATH` (optionnel, local seulement)
+- `DATABASE_URL` (utiliser une base Postgres externe en production)
 - `NODE_ENV`
 
-> En production Vercel, l'application utilisera `/tmp/database.sqlite` si `DATABASE_PATH` n'est pas défini.
+> En production Vercel, l'application utilisera `/tmp/database.sqlite` si `DATABASE_URL` n'est pas défini.
+> Si `DATABASE_URL` est défini, l'application se connectera à une base Postgres externe et gardera les données persistantes.
 
 ## Notes
 
