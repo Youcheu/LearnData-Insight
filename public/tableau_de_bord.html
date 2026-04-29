@@ -421,6 +421,53 @@
     initCharts();
     setInterval(updateDashboard, 10000);
     updateDashboard();
+
+    // Bot pour générer des données fictives toutes les 30 minutes
+    function generateFakeData() {
+      const genres = ['homme', 'femme', 'autre'];
+      const filieres = ['Informatique', 'Médecine', 'Droit', 'Économie', 'Lettres', 'Sciences', 'Arts'];
+      const sports = ['oui', 'non'];
+      const conseils = ['Étudiez régulièrement', 'Faites des pauses', 'Demandez de l\'aide', 'Pratiquez des exercices', 'Réviser en groupe'];
+      const outils = ['Ordinateur', 'Tablette', 'Téléphone', 'Cahiers', 'Livres'];
+
+      // Genre : 80% homme/femme, 20% autre
+      const genreRand = Math.random();
+      let genre;
+      if (genreRand < 0.4) genre = 'homme';
+      else if (genreRand < 0.8) genre = 'femme';
+      else genre = genres[Math.floor(Math.random() * genres.length)];
+
+      const data = {
+        genre: genre,
+        filiere: filieres[Math.floor(Math.random() * filieres.length)],
+        heures: Math.floor(Math.random() * 51), // 0-50
+        outils_numeriques: outils[Math.floor(Math.random() * outils.length)],
+        note: Math.floor(Math.random() * 21), // 0-20
+        sport: sports[Math.floor(Math.random() * sports.length)],
+        conseil: conseils[Math.floor(Math.random() * conseils.length)],
+        isReal: 0
+      };
+
+      return data;
+    }
+
+    async function addFakeData() {
+      const fakeData = generateFakeData();
+      try {
+        const { error } = await supabase.from('survey_data').insert([fakeData]);
+        if (error) {
+          console.error('Erreur bot:', error.message);
+        } else {
+          console.log('Donnée fictive ajoutée:', fakeData);
+          updateDashboard(); // Refresh dashboard
+        }
+      } catch (e) {
+        console.error('Bot failed:', e);
+      }
+    }
+
+    // Ajouter une donnée fictive toutes les 30 minutes (1 800 000 ms)
+    setInterval(addFakeData, 1800000);
   </script>
 </body>
 
