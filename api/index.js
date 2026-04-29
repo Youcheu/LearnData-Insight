@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -80,8 +81,8 @@ async function initializeDb() {
     if (db) return; // Already initialized
     
     try {
-        // Use /tmp on Vercel, or current directory locally
-        const dbPath = process.env.VERCEL ? '/tmp/database.sqlite' : path.join(__dirname, '../database.sqlite');
+        // Use a custom DATABASE_PATH if provided, otherwise /tmp on Vercel or local database.sqlite.
+        const dbPath = process.env.DATABASE_PATH || (process.env.VERCEL ? '/tmp/database.sqlite' : path.join(__dirname, '../database.sqlite'));
         
         db = await open({
             filename: dbPath,

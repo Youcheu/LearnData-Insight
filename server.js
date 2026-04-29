@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -5,7 +6,8 @@ const sqlite3 = require('sqlite3');
 const { open } = require('sqlite');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const DB_PATH = process.env.DATABASE_PATH || path.join(__dirname, 'database.sqlite');
 
 // Middleware
 app.use(cors());
@@ -70,7 +72,7 @@ function generateRecord(isReal = false) {
 async function start() {
     // Open DB
     db = await open({
-        filename: path.join(__dirname, 'database.sqlite'),
+        filename: DB_PATH,
         driver: sqlite3.Database
     });
 
