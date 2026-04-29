@@ -18,6 +18,16 @@ app.get('/', (req, res) => {
     res.redirect('/collecte_de_donn_es.html');
 });
 
+// Serve HTML files
+app.get('/collecte_de_donn_es.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/collecte_de_donn_es.html'));
+});
+
+app.get('/tableau_de_bord.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/tableau_de_bord.html'));
+});
+
+// Serve static files
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Configuration options for random data
@@ -70,8 +80,11 @@ async function initializeDb() {
     if (db) return; // Already initialized
     
     try {
+        // Use /tmp on Vercel, or current directory locally
+        const dbPath = process.env.VERCEL ? '/tmp/database.sqlite' : path.join(__dirname, '../database.sqlite');
+        
         db = await open({
-            filename: path.join(__dirname, '../database.sqlite'),
+            filename: dbPath,
             driver: sqlite3.Database
         });
 
@@ -106,13 +119,19 @@ async function initializeDb() {
         }
     } catch (error) {
         console.error('Database initialization error:', error);
+        throw error;
     }
 }
 
 // Initialize DB on first request (cold start)
 app.use(async (req, res, next) => {
-    await initializeDb();
-    next();
+    try {
+        await initializeDb();
+        next();
+    } catch (error) {
+        console.error('[INIT ERROR]', error);
+        res.status(500).json({ error: 'Database initialization failed', details: error.message });
+    }
 });
 
 // API Endpoints
@@ -143,6 +162,11 @@ app.get('/api/data', async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'LearnData Insight API is running' });
 });
 
 module.exports = app;
