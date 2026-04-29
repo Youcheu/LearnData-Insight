@@ -8,6 +8,7 @@
     "dev": "node server.js",
     "build": "echo \"Aucune étape de build nécessaire pour LearnData Insight\"",
     "vercel-build": "npm run build",
+    "migrate:sqlite-to-supabase": "node scripts/migrate-sqlite-to-supabase.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
