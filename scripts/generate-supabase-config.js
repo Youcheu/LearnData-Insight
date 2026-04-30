@@ -15,8 +15,20 @@ if (!supabaseUrl && databaseUrl) {
   }
 }
 
+if (supabaseUrl) {
+  try {
+    const parsed = new URL(supabaseUrl);
+    if (parsed.pathname && parsed.pathname !== '/') {
+      parsed.pathname = '/';
+      supabaseUrl = parsed.toString().replace(/\/$/, '');
+    }
+  } catch (error) {
+    // ignore invalid URL format
+  }
+}
+
 if (!supabaseUrl || !supabaseKey) {
-  console.error('Erreur : SUPABASE_URL (ou DATABASE_URL) et SUPABASE_ANON_KEY doivent être définis.');
+  console.error('Erreur : SUPABASE_URL (ou DATABASE_URL) et SUPABASE_ANON_KEY / NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY doivent être définis.');
   process.exit(1);
 }
 

@@ -317,7 +317,7 @@
   <script src="/supabase-config.js"></script>
   <script src="https://unpkg.com/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
   <script>
-    const supabase = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    const supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
     let histogramChart, genreChart, scatterChart;
 
     function initCharts() {
@@ -356,7 +356,7 @@
 
     async function updateDashboard() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
           .from('survey_data')
           .select('genre, filiere, heures, outils_numeriques, note, sport, conseil, created_at')
           .order('created_at', { ascending: false });
@@ -454,7 +454,7 @@
     async function addFakeData() {
       const fakeData = generateFakeData();
       try {
-        const { error } = await supabase.from('survey_data').insert([fakeData]);
+        const { error } = await supabaseClient.from('survey_data').insert([fakeData]);
         if (error) {
           console.error('Erreur bot:', error.message);
         } else {

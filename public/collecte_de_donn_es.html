@@ -280,7 +280,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
     <script src="/supabase-config.js"></script>
     <script>
-        const supabase = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        const supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
 
         document.querySelector('form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -290,7 +290,7 @@
             data.note = parseFloat(data.note) || 0;
 
             try {
-                const { error } = await supabase.from('survey_data').insert([data]);
+                const { error } = await supabaseClient.from('survey_data').insert([data]);
                 if (error) {
                     alert('Erreur lors de l\'envoi : ' + error.message);
                     return;

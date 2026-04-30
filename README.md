@@ -13,8 +13,8 @@ Application front-end statique utilisant Supabase pour stocker les données des 
 ## Déploiement Vercel
 
 1. Définis ces variables d'environnement dans Vercel :
-   - `SUPABASE_URL`
-   - `SUPABASE_ANON_KEY`
+   - `SUPABASE_URL` ou `NEXT_PUBLIC_SUPABASE_URL`
+   - `SUPABASE_ANON_KEY` ou `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 2. Assure-toi que `vercel.json` existe dans le projet.
 3. Déploie le projet normalement.
 
@@ -26,6 +26,10 @@ Crée un fichier `.env` à la racine du projet contenant :
 SUPABASE_URL=https://<your-project>.supabase.co
 SUPABASE_ANON_KEY=<your-public-anon-key>
 ```
+
+> Attention : n'utilise pas l'URL `https://<your-project>.supabase.co/rest/v1/` ici. Il faut l'URL du projet sans `/rest/v1`.
+>
+> Par exemple : `https://xrtzwikiyumsqdkwbmli.supabase.co`
 
 Si tu as déjà un `DATABASE_URL` Supabase, le script de build peut en extraire l'URL du projet :
 
